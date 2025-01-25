@@ -186,3 +186,39 @@
     display: none;
   }
 }
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh; /* Visina celog ekrana */
+  background: url('images/teretana.jpg') no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Dodaj polutransparentni sloj preko slike */
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Crni sloj sa 50% transparentnosti */
+  z-index: 1;
+}
+
+/* Osiguraj da sadržaj stranice bude iznad sloja */
+.container {
+  position: relative;
+  z-index: 2;
+  width: 90%;
+  max-width: 400px;
+  background-color: white; /* Pozadina forme */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}

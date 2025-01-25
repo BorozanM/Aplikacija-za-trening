@@ -21,14 +21,14 @@
     <input type="checkbox" id="flip">
     <div class="cover">
       <div class="front">
-        <img src="images/frontImg.jpg" alt="">
+        <img src="images/teretana.jpg" alt="">
         <div class="text">
           <span class="text-1">Svakim novim treningom <br>počinje nova avantura!</span>
           <span class="text-2">Kreni danas!</span>
         </div>
       </div>
       <div class="back">
-        <!--<img class="backImg" src="images/backImg.jpg" alt="">-->
+        <img class="backImg" src="images/treninzi.jpg" alt="">
         <div class="text">
           <span class="text-1">Ispuni svoje snove <br> svakim korakom!</span>
           <span class="text-2">Čekamo te!</span>

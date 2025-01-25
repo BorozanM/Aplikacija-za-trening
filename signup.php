@@ -20,6 +20,8 @@
         } else {
             // Greška pri registraciji
             echo '<script>alert("Došlo je do greške pri registraciji!")</script>';
+			echo '<script>window.location.href="index.php";</script>'; 
+
         }
 
 	}
