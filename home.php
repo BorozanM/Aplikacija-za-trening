@@ -26,7 +26,11 @@ include 'model/Training.php';
         <div class="container">
           <h1 class="display-3">Prati svaki korak!</h1>
           <p>Pomoću ove aplikacije ćeš brže i efikasnije pratiti napredak svojih treninga iz dana u dan.</p>
-          <p><a class="btn btn-primary btn-lg" href="#" role="button">Dodaj trening</a></p>
+          
+            <p><button type="button" class="btn btn-primary btn-lg"  data-toggle="modal" data-target="#addModal">Dodaj trening</button>
+          <button type="button" class="btn btn-primary btn-lg"  data-toggle="modal" data-target="#statisticsModal">Statistika</button>
+          </p>
+
         </div>
       </div>
 <!-- ovde je kraj zaglavlja, pocinje tabela -->
@@ -54,7 +58,7 @@ include 'model/Training.php';
 
     <tr>
           
-            <td> <?php echo $row['vrsta']?></td>
+            <td> <?php echo $row['vrsta_naziv']?></td>
             <td> <?php echo $row['trajanje']?></td>
             <td> <?php echo $row['kalorije']?></td>
             <td> <?php echo $row['tezina']?></td>
@@ -70,8 +74,195 @@ include 'model/Training.php';
 
 
 
+
+<!-- Add modal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="lblUpdateModal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="titleUpdate">Dodaj trening</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+                              
+                        <form  id="addform" style="max-width:500px;margin:auto" method="POST" enctype="multipart/form-data">
+ 
+                            <div class="input-container">
+                                <i class="fa fa-user icon"></i>
+                                <input class="input-field" type="text" placeholder="Vrsta treninga" name="model" id="model" required>
+                            </div>
+
+                            <div class="input-container">
+                                <i class="fa fa-pencil icon"></i>
+                                <input class="input-field" type="text" placeholder="Trajanje treninga(min)" name="description" id="description" required>
+                            </div>
+                            
+                            <div class="input-container">
+                                <i class="fa fa-tag icon"></i>
+                                <input class="input-field" type="text" placeholder="Kalorije" name="price" id="price" required>
+                            </div>
+                            <div class="input-container">
+                                <i class="fa fa-tag icon"></i>
+                                <input class="input-field" type="text" placeholder="Tezina" name="price" id="price" required>
+                            </div>
+                            <div class="input-container">
+                                <i class="fa fa-tag icon"></i>
+                                <input class="input-field" type="text" placeholder="Umor" name="price" id="price" required>
+                            </div>
+                            <div class="input-container">
+                                <i class="fa fa-tag icon"></i>
+                                <input class="input-field" type="text" placeholder="Dodatne beleške" name="price" id="price" required>
+                            </div>
+                            <div class="input-container">
+                                <i class="fa fa-tag icon"></i>
+                                <input class="input-field" type="text" placeholder="Datum i vreme treninga" name="price" id="price" required>
+                            </div>
+                       
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary" id="add" name="add"  >  Add</button>
+                            
+                        </div>                   
+                    
+                        </form>
+
+
+                        </div>
+                        
+                       
+                </div>
+            </div>
+        </div>
+<!-- End Add modal -->
+
+
+
+
+<!-- Statistics modal -->
+<div class="modal fade" id="statisticsModal" tabindex="-1" role="dialog" aria-labelledby="lblStatisticsModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Statistika treninga</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form id="statisticsForm" method="GET">
+                    <!-- Izbor meseca -->
+                    <div class="form-group">
+                        <label for="mesec">Izaberite mesec:</label>
+                        <select class="form-control" id="mesec" name="mesec" required>
+                            <option value="1">Januar</option>
+                            <option value="2">Februar</option>
+                            <option value="3">Mart</option>
+                            <option value="4">April</option>
+                            <option value="5">Maj</option>
+                            <option value="6">Jun</option>
+                            <option value="7">Jul</option>
+                            <option value="8">Avgust</option>
+                            <option value="9">Septembar</option>
+                            <option value="10">Oktobar</option>
+                            <option value="11">Novembar</option>
+                            <option value="12">Decembar</option>
+                        </select>
+                    </div>
+
+                    <!-- Izbor godine -->
+                    <div class="form-group">
+                        <label for="godina">Izaberite godinu:</label>
+                        <select class="form-control" id="godina" name="godina" required>
+                            <?php
+                            $trenutnaGodina = date("Y");
+                            for ($i = $trenutnaGodina; $i >= $trenutnaGodina - 5; $i--) {
+                                echo "<option value='$i'>$i</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary" id="prikaziStatistiku">Prikaži statistiku</button>
+                    </div>
+                </form>
+
+                <div id="statistikaRezultat" class="mt-3">
+                    <!-- Ovde će se prikazivati statistika -->
+                     
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Statistics modal -->
+
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<!-- JavaScript kod za formu statistike-->
+<script>
+document.getElementById('prikaziStatistiku').addEventListener('click', function () {
+    const mesec = document.getElementById('mesec').value;
+    const godina = document.getElementById('godina').value;
+
+    if (!mesec || !godina) {
+        alert('Molimo izaberite mesec i godinu.');
+        return;
+    }
+
+    fetch(`statistika.php?mesec=${mesec}&godina=${godina}`)
+        .then(response => response.json())
+        .then(data => {
+            const rezultatDiv = document.getElementById('statistikaRezultat');
+            rezultatDiv.innerHTML = ''; 
+
+            if (data.error) {
+                rezultatDiv.innerHTML = `<p class="text-danger">${data.error}</p>`;
+                return;
+            }
+
+            let tabela = `
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Nedelja</th>
+                            <th>Ukupno trajanje</th>
+                            <th>Broj treninga</th>
+                            <th>Prosečna težina treninga</th>
+                            <th>Prosečan umor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            data.forEach(stat => {
+                tabela += `
+                    <tr>
+                        <td>${stat.nedelja}</td>
+                        <td>${stat.ukupno_trajanje} min</td>
+                        <td>${stat.broj_treninga}</td>
+                        <td>${parseFloat(stat.prosecan_tezina).toFixed(2)}</td>
+                        <td>${parseFloat(stat.prosecan_umor).toFixed(2)}</td>
+                    </tr>
+                `;
+            });
+
+            tabela += `</tbody></table>`;
+            rezultatDiv.innerHTML = tabela;
+        })
+        .catch(error => {
+            console.error('Greška:', error);
+            document.getElementById('statistikaRezultat').innerHTML = '<p class="text-danger">Došlo je do greške prilikom učitavanja statistike.</p>';
+        });
+});
+</script>
+
+
 </body>
 </html>

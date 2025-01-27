@@ -283,22 +283,22 @@ border-radius: .3rem;
 }
 
 .jumbotron .btn {
-  border-radius: 50px; /* Zaokružene ivice */
-  padding: 8px 20px; /* Manji prostor unutar dugmeta */
-  font-size: 16px; /* Manji font za dugme */
-  font-weight: 600; /* Podebljan font */
-  background-color: #7d2ae8; /* Ljubičasta boja pozadine */
-  color: white; /* Bela boja teksta */
-  border: none; /* Uklanja ivicu */
-  text-decoration: none; /* Uklanja podvlačenje */
-  transition: background-color 0.3s ease, transform 0.3s ease; /* Glatke animacije */
+  border-radius: 50px; 
+  padding: 8px 20px; 
+  font-size: 16px;
+  font-weight: 600; 
+  background-color: #7d2ae8; 
+  color: white;
+  border: none; 
+  text-decoration: none; 
+  transition: background-color 0.3s ease, transform 0.3s ease; 
 }
 
 .jumbotron .btn:hover {
-  background-color: #5b13b9; /* Tamniji ljubičasti ton pri hover efektu */
-  transform: scale(1.05); /* Blago uvećanje pri hoveru */
+  background-color: #5b13b9; 
+  transform: scale(1.05);
 }
 
 .jumbotron .btn:focus {
-  outline: none; /* Uklanja outline kada je dugme u fokusu */
+  outline: none; 
 }
