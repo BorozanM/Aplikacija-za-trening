@@ -33,7 +33,14 @@ class Training{
         $query= "select * from training p inner join user u on u.id=p.user";
         return $conn->query($query);
     }
-
+    
+    public static function getTrainingByUser($userId, $conn) {
+        $query = "SELECT p.* FROM training p INNER JOIN user u ON u.id = p.user WHERE u.id = ? ORDER BY p.datumVreme DESC";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("i", $userId); 
+        $stmt->execute();
+        return $stmt->get_result();
+    }
 
     public static function addTraining($training, $conn){
 
@@ -47,29 +54,7 @@ class Training{
     }
 
 
-    // public static function getLaptopById($id, $conn){
-
-    //     $query= "select * from laptop p inner join user u on u.id=p.user where p.id=$id";
-        
-    //     return $conn->query($query);
-
-
-    // }
-
-
-    // public static function deleteLaptop($id,$conn){
-
-    //     $query = "delete from laptop where id=$id";
-    //     return $conn->query($query);
-
-    // }
-
-    // public static function updateLaptop($laptop,$conn){
-
-    //     $query = "update laptop set model='$laptop->model', description = '$laptop->description', price = $laptop->price where id = $laptop->id";
-    //     return $conn->query($query);
-
-    // }
+    
 
 
 

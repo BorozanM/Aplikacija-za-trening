@@ -6,7 +6,6 @@
 
 
 <!DOCTYPE html>
-<!-- Coding by CodingNepal | www.codingnepalweb.com-->
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8">
@@ -14,6 +13,9 @@
     <link rel="stylesheet" href="style.css">
     <!-- Fontawesome CDN Link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <style> .button input-box{} </style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
    </head>
 <body>
@@ -23,7 +25,7 @@
       <div class="front">
         <img src="images/teretana.jpg" alt="">
         <div class="text">
-          <span class="text-1">Svakim novim treningom <br>počinje nova avantura!</span>
+          <span class="text-1">Svakim treningom <br>počinje nova avantura!</span>
           <span class="text-2">Kreni danas!</span>
         </div>
       </div>
@@ -49,7 +51,7 @@
                 <i class="fas fa-lock"></i>
                 <input type="password" name="passLogin" id="passLogin" placeholder="Unesi lozinku" required>
               </div>
-              <!-- <div class="text"><a href="#">Forgot password?</a></div> -->
+              <!-- <div class="text"><a href="#">Zaboravljena lozinka?</a></div> -->
               
     <div class="button input-box" action="login.php" method="POST">
         <input type="submit" id="login" name="login" value="Potvrdi">
@@ -59,7 +61,7 @@
         </form>
       </div>
         <div class="signup-form">
-          <div class="title">Registruj se</div>
+          <div class="title"><br>Registruj se</div>
         <form action="signup.php" method="POST">
             <div class="input-boxes">
               <div class="input-box">

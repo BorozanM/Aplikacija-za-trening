@@ -17,11 +17,12 @@ class User{
    
 
     public static function login($user,$conn){
-        $query = "select * from user where email='$user->email' and password='$user->password'";
-
-        return $conn->query($query);
-
+        $stmt = $conn->prepare("SELECT * FROM user WHERE email = ?");
+        $stmt->bind_param("s", $user->email);
+        $stmt->execute();
+        return $stmt->get_result();
     }
+
     
     
     public static function signup($user,$conn){
@@ -44,11 +45,9 @@ class User{
         $stmt->bind_param("sss", $user->name, $user->email,$hashedPassword);  // 'sss' svi stringovi
     
         if ($stmt->execute()) {
-            // Ako je upit uspešno izvršen, vrati true
             $stmt->close();
             return true;
         } else {
-            // Ako je došlo do greške, vrati false
             $stmt->close();
             return false;
         }
@@ -66,8 +65,8 @@ class User{
                 $myArray[] = $row;
             }
         }
-        // return $myArray[0]["userId"];
-return 1;
+       return $myArray[0]["id"];
+       
     }
  
 
