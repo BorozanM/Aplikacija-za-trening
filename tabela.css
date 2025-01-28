@@ -159,3 +159,70 @@ tbody tr:hover {
     background-color: #6a0dad;
     color: white;
 }
+
+
+
+/* Stilovi za veće ekrane (default) */
+body {
+    font-size: 16px;
+    padding: 20px;
+}
+
+/* Stilovi za mobilne uređaje (maksimalna širina 768px) */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .container {
+        flex-direction: column; /* Za vertikalni raspored */
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+/* Stilovi za vrlo male uređaje (maksimalna širina 480px) */
+@media (max-width: 480px) {
+    body {
+        font-size: 12px;
+    }
+
+    .button {
+        width: 100%; /* Dugme zauzima celu širinu */
+    }
+}
+@media (max-width: 768px) {
+    .table-container {
+        padding: 10px; /* Smanji padding oko tabele */
+    }
+
+    .table {
+        font-size: 14px; /* Smanji veličinu fonta */
+    }
+
+    .table th, .table td {
+        padding: 5px; /* Smanji padding unutar ćelija */
+    }
+}
+
+@media (max-width: 480px) {
+    .table-container {
+        overflow-x: auto; /* Omogući skrolovanje za jako male ekrane */
+    }
+
+    .table {
+        font-size: 12px; /* Još manje fonta za uske ekrane */
+    }
+
+    .table th, .table td {
+        white-space: nowrap; /* Spreči prelamanje teksta */
+    }
+
+    .table th, .table td {
+        padding: 3px; /* Minimalni padding */
+    }
+}
