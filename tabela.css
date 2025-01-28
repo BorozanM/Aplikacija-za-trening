@@ -7,7 +7,7 @@
 }
 
 .modal-header {
-    background-color: #6c5ce7;
+    background-color: #7d2ae8;
     color: #fff;
     border-radius: 8px 8px 0 0;
 }
@@ -25,12 +25,12 @@
 }
 
 .modal-footer {
-    background-color: #6c5ce7;
+    background-color: #7d2ae8;
     border-radius: 0 0 8px 8px;
 }
 
 .modal-footer button {
-    background-color: #a29bfe;
+    background-color: #ca98ec;
     border: none;
     padding: 10px 20px;
     border-radius: 20px;
@@ -40,7 +40,7 @@
 }
 
 .modal-footer button:hover {
-    background-color: #6c5ce7;
+    background-color: #7d2ae8;
 }
 
 .table-container {
@@ -56,7 +56,7 @@
 
 .table-container h2 {
     font-size: 1.5rem;
-    color: #a29bfe;
+    color: #ca98ec;
     text-align: center;
     margin-bottom: 1rem;
     position: sticky;
@@ -75,11 +75,11 @@
 thead th {
     position: sticky;
     top: 3rem;
-    background-color: #6c5ce7;
+    background-color: #7d2ae8;
     color: #fff;
     text-align: left;
     padding: 0.5rem;
-    border-bottom: 2px solid #a29bfe;
+    border-bottom: 2px solid #ca98ec;
 }
 
 tbody td {
@@ -100,12 +100,12 @@ tbody tr:hover {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #6c5ce7;
+    background: #7d2ae8;
     border-radius: 8px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #a29bfe;
+    background: #ca98ec;
 }
 
 /* Buttons styling */
@@ -149,7 +149,7 @@ tbody tr:hover {
     background-color: white;
     border: 2px solid #3f3c41;
     border-radius: 20px;
-    color: #6a0dad;
+    color: #7d2ae8;
     font-size: 14px;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;

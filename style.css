@@ -268,18 +268,27 @@ body:before {
 }
 
 
-
 .jumbotron {
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  color: #6a0dad;
+  color: #ffffff;
   padding: 4rem 2rem;
+  position: relative;
+  z-index: 1;
 }
 
-.jumbotron {
-padding: 2rem 1rem;
-margin-bottom: 2rem;
-background-color: #e9ecef;
-border-radius: .3rem;
+.jumbotron::before {
+  content: ''; 
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('images/teretana.jpg'); /* Tvoja slika */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: brightness(50%) opacity(90%); /* Tamnija slika i malo veća neprozirnost */
+  z-index: -1;
 }
 
 .jumbotron .btn {

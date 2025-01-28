@@ -57,21 +57,28 @@ include 'model/VrstaTreninga.php';
             </tr>
         </thead>
         <tbody>
-            <?php while ($row = $trainings->fetch_array()):
-                $formattedDate = date("Y-m-d H:i", strtotime($row['datumVreme'])); ?>
+            <?php if ($trainings->num_rows > 0): ?>
+                <?php while ($row = $trainings->fetch_array()): 
+                    $formattedDate = date("Y-m-d H:i", strtotime($row['datumVreme'])); ?>
+                    <tr>
+                        <td><?php echo $row['vrsta_naziv']; ?></td>
+                        <td><?php echo $row['trajanje']; ?></td>
+                        <td><?php echo $row['kalorije']; ?></td>
+                        <td><?php echo $row['tezina']; ?></td>
+                        <td><?php echo $row['umor']; ?></td>
+                        <td><?php echo $row['beleske']; ?></td>
+                        <td><?php echo $formattedDate; ?></td>
+                    </tr>
+                <?php endwhile; ?>
+            <?php else: ?>
                 <tr>
-                    <td><?php echo $row['vrsta_naziv']; ?></td>
-                    <td><?php echo $row['trajanje']; ?></td>
-                    <td><?php echo $row['kalorije']; ?></td>
-                    <td><?php echo $row['tezina']; ?></td>
-                    <td><?php echo $row['umor']; ?></td>
-                    <td><?php echo $row['beleske']; ?></td>
-                    <td><?php echo $formattedDate; ?></td>
+                    <td colspan="7" class="text-center">Kada kreneš sa treninzima, oni će se nalaziti ovde u tabeli kako bi vodio evidenciju. Srećno!</td>
                 </tr>
-            <?php endwhile; ?>
+            <?php endif; ?>
         </tbody>
     </table>
 </div>
+
 
 
 
