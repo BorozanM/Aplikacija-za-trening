@@ -122,8 +122,8 @@ ORDER BY nedelja;
     public static function getTrainingTypes($conn)
     {
         $query = "SELECT DISTINCT vt.id, vt.naziv 
-                  FROM vrste_treninga vt
-                  JOIN training t ON vt.id = t.vrsta_id";
+FROM vrste_treninga vt
+LEFT JOIN training t ON vt.id = t.vrsta_id";
         $result = $conn->query($query);
 
         if (!$result) {
