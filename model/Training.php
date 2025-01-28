@@ -10,7 +10,7 @@ class Training
     private $beleske;
     private $datumVreme;
     private $user;
-    private $vrstaId;
+    private $vrsta_id;
 
     public function __construct(
         $id = null,
@@ -21,7 +21,7 @@ class Training
         $beleske = null,
         $datumVreme = null,
         $user = null,
-        $vrstaId = null
+        $vrsta_id = null
     ) {
         $this->id = $id;
         $this->trajanje = $trajanje;
@@ -32,7 +32,7 @@ class Training
         $this->datumVreme = $datumVreme;
 
         $this->user = $user;
-        $this->vrstaId = $vrstaId;
+        $this->vrsta_id = $vrsta_id;
 
     }
 
@@ -65,7 +65,7 @@ class Training
         return false; 
     }
 
-    $query = "INSERT INTO training (trajanje, kalorije, tezina, umor, beleske, datumVreme, user, vrstaId) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $query = "INSERT INTO training (trajanje, kalorije, tezina, umor, beleske, datumVreme, user, vrsta_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($query);
     $stmt->bind_param(
         "iiiissii",
@@ -76,7 +76,7 @@ class Training
         $training->beleske,
         $training->datumVreme,
         $training->user,
-        $training->vrstaId
+        $training->vrsta_id
     );
     return $stmt->execute();
 }

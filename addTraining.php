@@ -1,10 +1,10 @@
 <?php
 session_start();
 include 'dbbroker.php';  
-include 'Training.php'; 
+include 'model/Training.php'; 
 
 if (isset($_POST['add'])) {
-    $vrstaId = $_POST['training_type']; 
+    $vrsta_id = $_POST['training_type']; 
     $trajanje = $_POST['duration'];  
     $kalorije = $_POST['calories']; 
     $tezina = $_POST['weight']; 
@@ -23,7 +23,7 @@ if (isset($_POST['add'])) {
         $beleske,
         $datumVreme,
         $userId,
-        $vrstaId
+        $vrsta_id
     );
 
     $result = Training::addTraining($training, $conn);

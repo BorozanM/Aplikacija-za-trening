@@ -25,6 +25,8 @@ include 'model/VrstaTreninga.php';
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="tabela.css">
+
 </head>
 <body>
 
@@ -40,43 +42,38 @@ include 'model/VrstaTreninga.php';
         </div>
       </div>
 <!-- ovde je kraj zaglavlja, pocinje tabela -->
-      <table class="table">
-  <thead>
-    <tr>
-    
-      <th scope="col">Vrsta</th>
-      <th scope="col">Trajanje</th>
-      <th scope="col">Kalorije</th>
-      <th scope="col">Tezina</th>
-      <th scope="col">Umor</th>
-      <th scope="col">Beleske</th>
-      <th scope="col">Datum i vreme</th>
+<div class="table-container">
+    <h2>Tvoji treninzi</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Vrsta</th>
+                <th scope="col">Trajanje</th>
+                <th scope="col">Kalorije</th>
+                <th scope="col">Tezina</th>
+                <th scope="col">Umor</th>
+                <th scope="col">Beleske</th>
+                <th scope="col">Datum i vreme</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php while ($row = $trainings->fetch_array()):
+                $formattedDate = date("Y-m-d H:i", strtotime($row['datumVreme'])); ?>
+                <tr>
+                    <td><?php echo $row['vrsta_naziv']; ?></td>
+                    <td><?php echo $row['trajanje']; ?></td>
+                    <td><?php echo $row['kalorije']; ?></td>
+                    <td><?php echo $row['tezina']; ?></td>
+                    <td><?php echo $row['umor']; ?></td>
+                    <td><?php echo $row['beleske']; ?></td>
+                    <td><?php echo $formattedDate; ?></td>
+                </tr>
+            <?php endwhile; ?>
+        </tbody>
+    </table>
+</div>
 
-    </tr>
-  </thead>
-  <tbody>
-  <?php
-   
-    while( $row = $trainings ->fetch_array()):
-      $formattedDate = date("Y-m-d H:i", strtotime($row['datumVreme']));
-      ?>
 
-
-    <tr>
-          
-            <td> <?php echo $row['vrsta_naziv']?></td>
-            <td> <?php echo $row['trajanje']?></td>
-            <td> <?php echo $row['kalorije']?></td>
-            <td> <?php echo $row['tezina']?></td>
-            <td> <?php echo $row['umor']?></td>
-            <td> <?php echo $row['beleske']?></td>
-            <td><?php echo $formattedDate; ?></td> <!-- Prikaz formiranog datuma i vremena -->
-
-    </tr>
-
-    <?php endwhile;?>
-  </tbody>
-</table>
 
 
 
@@ -92,35 +89,29 @@ include 'model/VrstaTreninga.php';
                 </button>
             </div>
             <div class="modal-body">
-                <form id="addform" style="max-width:500px;margin:auto" method="POST" enctype="multipart/form-data">
+                <form id="addform" style="max-width:500px;margin:auto" method="POST" action="addTraining.php" enctype="multipart/form-data">
 
-                                  
-<!-- Vrsta treninga -->
-<div class="input-container">
-    <i class="fa fa-user icon"></i>
-    <select class="input-field" name="training_type" id="training_type" required>
-        <option value="" disabled selected>Vrsta treninga</option>
-        <?php foreach ($trainingTypes as $type) { ?>
-            <option value="<?php echo $type['id']; ?>"><?php echo $type['naziv']; ?></option>
-        <?php } ?>
-    </select>
-</div>
-
+                    <!-- Vrsta treninga -->
+                    <div class="input-container">
+                        <select class="input-field" name="training_type" id="training_type" required>
+                            <option value="" disabled selected>Vrsta treninga</option>
+                            <?php foreach ($trainingTypes as $type) { ?>
+                                <option value="<?php echo $type['id']; ?>"><?php echo $type['naziv']; ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
 
                     <!-- Trajanje i Kalorije -->
                     <div class="input-container">
-                        <i class="fa fa-pencil icon"></i>
                         <input class="input-field" type="number" placeholder="Trajanje treninga (min)" name="duration" id="duration" min="0" required>
                     </div>
 
                     <div class="input-container">
-                        <i class="fa fa-tag icon"></i>
                         <input class="input-field" type="number" placeholder="Kalorije" name="calories" id="calories" min="0" required>
                     </div>
 
                     <!-- Težina i Umor -->
                     <div class="input-container">
-                        <i class="fa fa-tag icon"></i>
                         <select class="input-field" name="weight" id="weight" required>
                             <option value="" disabled selected>Težina</option>
                             <?php for ($i = 1; $i <= 10; $i++) { echo "<option value='$i'>$i</option>"; } ?>
@@ -128,7 +119,6 @@ include 'model/VrstaTreninga.php';
                     </div>
 
                     <div class="input-container">
-                        <i class="fa fa-tag icon"></i>
                         <select class="input-field" name="fatigue" id="fatigue" required>
                             <option value="" disabled selected>Umor</option>
                             <?php for ($i = 1; $i <= 10; $i++) { echo "<option value='$i'>$i</option>"; } ?>
@@ -137,19 +127,24 @@ include 'model/VrstaTreninga.php';
 
                     <!-- Dodatne beleške -->
                     <div class="input-container">
-                        <i class="fa fa-tag icon"></i>
                         <input class="input-field" type="text" placeholder="Dodatne beleške" name="notes" id="notes" required>
                     </div>
 
                     <!-- Datum i vreme -->
                     <div class="input-container">
-                        <i class="fa fa-calendar icon"></i>
                         <input class="input-field" type="datetime-local" name="datetime" id="datetime" required>
                     </div>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                            const datetimeInput = document.getElementById('datetime');
+                            const now = new Date();
+                            const currentDateTime = now.toISOString().slice(0, 16);
+                            datetimeInput.max = currentDateTime;
+                        });
+                    </script>
 
                     <!-- Footer -->
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Zatvori</button>
                         <button type="submit" class="btn btn-primary" id="add" name="add">Dodaj</button>
                     </div>                   
                 </form>
@@ -158,6 +153,7 @@ include 'model/VrstaTreninga.php';
     </div>
 </div>
 <!-- End Add modal -->
+
 
 
 

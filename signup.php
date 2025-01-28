@@ -18,7 +18,6 @@
 			echo '<script>window.location.href="index.php";</script>'; 
             exit(); 
         } else {
-            // Greška pri registraciji
             echo '<script>alert("Korisnik sa istim mailom već postoji.")</script>';
 			echo '<script>window.location.href="index.php";</script>'; 
 
