@@ -58,34 +58,30 @@ class Training
         return $stmt->get_result();
     }
 
-    public static function addTraining($training, $conn)
-    {
-        $query = "INSERT INTO training (trajanje, kalorije, tezina, umor, beleske, datumVreme, user, vrstaId) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param(
-            "iiiiissi",
-            $training->trajanje,
-            $training->kalorije,
-            $training->tezina,
-            $training->umor,
-            $training->beleske,
-            $training->datumVreme,
-            $training->user,
-            $training->vrstaId
-        );
-        return $stmt->execute();
+    public static function addTraining($training, $conn): mixed
+{
+    
+    if ($training->trajanje < 0 || $training->kalorije < 0 || $training->tezina < 1 || $training->tezina > 10 || $training->umor < 1 || $training->umor > 10) {
+        return false; 
     }
 
-    // public static function addTraining($training, $conn){
+    $query = "INSERT INTO training (trajanje, kalorije, tezina, umor, beleske, datumVreme, user, vrstaId) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param(
+        "iiiissii",
+        $training->trajanje,
+        $training->kalorije,
+        $training->tezina,
+        $training->umor,
+        $training->beleske,
+        $training->datumVreme,
+        $training->user,
+        $training->vrstaId
+    );
+    return $stmt->execute();
+}
 
-    //     $query= "insert into training(vrsta ,trajanje,kalorije ,tezina, umor, beleske, datumVreme, user ) values
-    //     ('$training->vrsta','$training->trajanje',$training->kalorije,$training->tezina,$training->umor,
-    //     $training->beleske,$training->datumVreme,$training->user )";
 
-    //     return $conn->query($query);
-
-
-    // }
 
     public static function getWeeklyStats($mesec, $godina, $userId, $conn)
     {
@@ -123,6 +119,25 @@ ORDER BY nedelja;
         return $stats;
     }
 
+    public static function getTrainingTypes($conn)
+    {
+        $query = "SELECT DISTINCT vt.id, vt.naziv 
+                  FROM vrste_treninga vt
+                  JOIN training t ON vt.id = t.vrsta_id";
+        $result = $conn->query($query);
+
+        if (!$result) {
+            die('Greška u upitu: ' . $conn->error);
+        }
+
+        // Čitanje rezultata i vraćanje kao asocijativni niz
+        $trainingTypes = [];
+        while ($row = $result->fetch_assoc()) {
+            $trainingTypes[] = $row;
+        }
+
+        return $trainingTypes;
+    }
 
 
 }

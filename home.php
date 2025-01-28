@@ -6,8 +6,14 @@ $userName = $_SESSION["currentUserName"];
 include 'navbar.php';
 include 'dbbroker.php';
 include 'model/Training.php';
+include 'model/VrstaTreninga.php';
+
 
  $trainings = Training::getTrainingByUser($userId, $conn);
+ $trainingTypes = Training::getTrainingTypes($conn);
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -77,66 +83,82 @@ include 'model/Training.php';
 
 <!-- Add modal -->
 <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="lblUpdateModal" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="titleUpdate">Dodaj trening</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="titleUpdate">Dodaj trening</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addform" style="max-width:500px;margin:auto" method="POST" enctype="multipart/form-data">
 
-                        <div class="modal-body">
-                              
-                        <form  id="addform" style="max-width:500px;margin:auto" method="POST" enctype="multipart/form-data">
- 
-                            <div class="input-container">
-                                <i class="fa fa-user icon"></i>
-                                <input class="input-field" type="text" placeholder="Vrsta treninga" name="model" id="model" required>
-                            </div>
-
-                            <div class="input-container">
-                                <i class="fa fa-pencil icon"></i>
-                                <input class="input-field" type="text" placeholder="Trajanje treninga(min)" name="description" id="description" required>
-                            </div>
-                            
-                            <div class="input-container">
-                                <i class="fa fa-tag icon"></i>
-                                <input class="input-field" type="text" placeholder="Kalorije" name="price" id="price" required>
-                            </div>
-                            <div class="input-container">
-                                <i class="fa fa-tag icon"></i>
-                                <input class="input-field" type="text" placeholder="Tezina" name="price" id="price" required>
-                            </div>
-                            <div class="input-container">
-                                <i class="fa fa-tag icon"></i>
-                                <input class="input-field" type="text" placeholder="Umor" name="price" id="price" required>
-                            </div>
-                            <div class="input-container">
-                                <i class="fa fa-tag icon"></i>
-                                <input class="input-field" type="text" placeholder="Dodatne beleške" name="price" id="price" required>
-                            </div>
-                            <div class="input-container">
-                                <i class="fa fa-tag icon"></i>
-                                <input class="input-field" type="text" placeholder="Datum i vreme treninga" name="price" id="price" required>
-                            </div>
-                       
-                            <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary" id="add" name="add"  >  Add</button>
-                            
-                        </div>                   
-                    
-                        </form>
+                                  
+<!-- Vrsta treninga -->
+<div class="input-container">
+    <i class="fa fa-user icon"></i>
+    <select class="input-field" name="training_type" id="training_type" required>
+        <option value="" disabled selected>Vrsta treninga</option>
+        <?php foreach ($trainingTypes as $type) { ?>
+            <option value="<?php echo $type['id']; ?>"><?php echo $type['naziv']; ?></option>
+        <?php } ?>
+    </select>
+</div>
 
 
-                        </div>
-                        
-                       
-                </div>
+                    <!-- Trajanje i Kalorije -->
+                    <div class="input-container">
+                        <i class="fa fa-pencil icon"></i>
+                        <input class="input-field" type="number" placeholder="Trajanje treninga (min)" name="duration" id="duration" min="0" required>
+                    </div>
+
+                    <div class="input-container">
+                        <i class="fa fa-tag icon"></i>
+                        <input class="input-field" type="number" placeholder="Kalorije" name="calories" id="calories" min="0" required>
+                    </div>
+
+                    <!-- Težina i Umor -->
+                    <div class="input-container">
+                        <i class="fa fa-tag icon"></i>
+                        <select class="input-field" name="weight" id="weight" required>
+                            <option value="" disabled selected>Težina</option>
+                            <?php for ($i = 1; $i <= 10; $i++) { echo "<option value='$i'>$i</option>"; } ?>
+                        </select>
+                    </div>
+
+                    <div class="input-container">
+                        <i class="fa fa-tag icon"></i>
+                        <select class="input-field" name="fatigue" id="fatigue" required>
+                            <option value="" disabled selected>Umor</option>
+                            <?php for ($i = 1; $i <= 10; $i++) { echo "<option value='$i'>$i</option>"; } ?>
+                        </select>
+                    </div>
+
+                    <!-- Dodatne beleške -->
+                    <div class="input-container">
+                        <i class="fa fa-tag icon"></i>
+                        <input class="input-field" type="text" placeholder="Dodatne beleške" name="notes" id="notes" required>
+                    </div>
+
+                    <!-- Datum i vreme -->
+                    <div class="input-container">
+                        <i class="fa fa-calendar icon"></i>
+                        <input class="input-field" type="datetime-local" name="datetime" id="datetime" required>
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Zatvori</button>
+                        <button type="submit" class="btn btn-primary" id="add" name="add">Dodaj</button>
+                    </div>                   
+                </form>
             </div>
         </div>
+    </div>
+</div>
 <!-- End Add modal -->
+
 
 
 

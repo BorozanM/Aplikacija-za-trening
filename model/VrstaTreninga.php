@@ -28,5 +28,12 @@ class VrstaTreninga {
         $stmt->execute();
         return $stmt->get_result()->fetch_assoc();
     }
+
+    public static function getVrste($conn)
+{
+    $query = "SELECT id, naziv FROM vrste_treninga"; 
+    $result = $conn->query($query);
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
 }
 ?>
